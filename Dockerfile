@@ -16,5 +16,10 @@ COPY --from=build /src/web/.webpack ./
 COPY ./Default.json ./
 COPY ./RosbotTeleop.json ./
 
+COPY Caddyfile /etc/caddy/Caddyfile
+
 EXPOSE 8080
-CMD ["caddy", "file-server", "--listen", ":8080"]
+# CMD ["caddy", "file-server", "--listen", ":8080"]
+
+# disable cache
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
